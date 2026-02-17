@@ -1,19 +1,27 @@
 #include <iostream>
-#include "array.h"
+#include "array.hpp"
 #include <array>
 
 int main() {
-    std::array<int, 5> stdA{};
-    ww::array wwA{};
-    for (const auto &el: stdA) {
-        std::cout << "stdel: " << el << "\n";
-    }
+    // std::array<int, 5> my_array{};
+    // my_array.size();
+
+    ww::array<int, 10> wwA{};
 
     for (const auto &el: wwA) {
-        std::cout << "wwel: " << el << "\n";
+        std::cout << el << ", ";
     }
 
-    std::cout << "Done!" << "\n";
+    for (int i = 0; i < wwA.size(); i++) {
+        wwA[i] = (i + 5) % 10;
+    }
+
+    std::cout << "\n";
+    for (int i = 0; i < wwA.size(); i++) {
+        std::cout << wwA[i] << ", ";
+    }
+
+    std::cout << "\nDone!\n";
 
     return 0;
 }

@@ -3,6 +3,4 @@ project(cpp_stl)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(cpp_stl main.cpp
-        array.cpp
-        array.h)
+add_executable(cpp_stl main.cpp array.hpp)
