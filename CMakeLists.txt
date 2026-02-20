@@ -3,4 +3,6 @@ project(cpp_stl)
 
 set(CMAKE_CXX_STANDARD 23)
 
+add_compile_options(-Wno-narrowing)
+
 add_executable(cpp_stl main.cpp array.hpp)

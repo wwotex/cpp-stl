@@ -1,41 +1,43 @@
 #pragma once
+#include <cassert>
 
 namespace ww {
     template<typename TYPE, size_t SIZE>
-    class array {
-        TYPE buffer[SIZE];
-
-    public:
-        array() : buffer{} {
-            std::cout << "Default constructor" << std::endl;
-        }
+    struct array {
+        TYPE M_buffer[SIZE] = {};
 
         [[nodiscard]] TYPE *begin() {
-            return this->buffer;
+            return M_buffer;
         }
 
         [[nodiscard]] const TYPE *begin() const {
-            return this->buffer;
+            return M_buffer;
         }
 
         [[nodiscard]] TYPE *end() {
-            return &this->buffer[SIZE];
+            return &M_buffer[SIZE];
         }
 
         [[nodiscard]] const TYPE *end() const {
-            return &this->buffer[SIZE];
+            return &M_buffer[SIZE];
         }
 
         [[nodiscard]] constexpr size_t size() const {
             return SIZE;
         }
 
-        [[nodiscard]] TYPE &operator[](size_t index) {
-            return this->buffer[index];
+        [[nodiscard]] constexpr TYPE &operator[](size_t index) {
+            assert(index < SIZE);
+            return M_buffer[index];
         }
 
-        [[nodiscard]] const TYPE &operator[](size_t index) const {
-            return this->buffer[index];
+        [[nodiscard]] constexpr const TYPE &operator[](size_t index) const {
+            assert(("Index out of range", index < SIZE));
+            return M_buffer[index];
         }
     };
+
+
+    template<typename TYPE, typename... ARGS>
+    array(TYPE, ARGS...) -> array<std::enable_if_t<(std::is_same_v<TYPE, ARGS> && ...), TYPE>, 1 + sizeof...(ARGS)>;
 }
