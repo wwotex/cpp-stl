@@ -6,23 +6,33 @@ namespace ww {
     struct array {
         TYPE M_buffer[SIZE] = {};
 
-        [[nodiscard]] TYPE *begin() {
+        [[nodiscard]] constexpr TYPE *begin() noexcept {
             return M_buffer;
         }
 
-        [[nodiscard]] const TYPE *begin() const {
+        [[nodiscard]] constexpr const TYPE *begin() const noexcept {
             return M_buffer;
         }
 
-        [[nodiscard]] TYPE *end() {
+        [[nodiscard]] constexpr TYPE *end() noexcept {
             return &M_buffer[SIZE];
         }
 
-        [[nodiscard]] const TYPE *end() const {
+        [[nodiscard]] constexpr const TYPE *end() const noexcept {
             return &M_buffer[SIZE];
         }
 
-        [[nodiscard]] constexpr size_t size() const {
+        [[nodiscard]] constexpr TYPE &back() noexcept {
+            static_assert(SIZE > 0);
+            return M_buffer[SIZE - 1];
+        }
+
+        [[nodiscard]] constexpr const TYPE &back() const noexcept {
+            static_assert(SIZE > 0);
+            return M_buffer[SIZE - 1];
+        }
+
+        [[nodiscard]] constexpr size_t size() noexcept {
             return SIZE;
         }
 
@@ -32,7 +42,7 @@ namespace ww {
         }
 
         [[nodiscard]] constexpr const TYPE &operator[](size_t index) const {
-            assert(("Index out of range", index < SIZE));
+            assert(index < SIZE);
             return M_buffer[index];
         }
     };
