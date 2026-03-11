@@ -6,6 +6,12 @@ namespace ww {
     struct array {
         TYPE M_buffer[SIZE] = {};
 
+        constexpr void fill(const TYPE &value) {
+            for (auto &el: M_buffer) {
+                el = value;
+            }
+        }
+
         [[nodiscard]] constexpr TYPE *begin() noexcept {
             return M_buffer;
         }
