@@ -18,7 +18,8 @@ namespace ww {
                 return;
             }
 
-            for (size_t i = 0; i < m_size; i++) {
+            auto n_to_copy = std::min(new_capacity, m_size);
+            for (size_t i = 0; i < n_to_copy; i++) {
                 m_buffer[i] = old_buffer[i];
             }
 
@@ -26,6 +27,12 @@ namespace ww {
         }
 
     public:
+        void clear() noexcept {
+            delete[] m_buffer;
+            m_size = 0;
+            m_capacity = 0;
+        }
+
         void push_back(const TYPE &new_element) noexcept {
             if (m_size == m_capacity) {
                 this->reserve(m_capacity == 0 ? 1 : m_capacity * 2);
