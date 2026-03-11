@@ -29,6 +29,7 @@ namespace ww {
     public:
         void clear() noexcept {
             delete[] m_buffer;
+            m_buffer = nullptr;
             m_size = 0;
             m_capacity = 0;
         }

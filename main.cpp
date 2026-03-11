@@ -34,5 +34,14 @@ int main() {
             cout << "size: " << vec.size() << " capacity: " << vec.capacity() << "\n\n";
         }
     }
+    {
+        ww::vector<std::string> vec;
+
+        for (int i = 0; i < 1000000; i++) {
+            vec.push_back("xxxxxxxxxx");
+            vec.clear();
+        }
+        // vec.clear();
+    }
     return 0;
 }
